@@ -8,5 +8,5 @@ Description: JWT C Library
 Version: @PACKAGE_VERSION@
 
 Cflags: -I${includedir}
-Libs: -L${libdir} -ljwt
-Libs.private: @JANSSON_LIBS@ @SSL_DEF_LIBS@
+Libs: -L${libdir} -ljwt-ossl
+Libs.private: @JANSSON_LIBS@ @OPENSSL_LIBS@
