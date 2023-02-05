@@ -1,5 +1,5 @@
 AC_PREREQ([2.61])
-AC_INIT([libjwt], [1.13.1], [https://github.com/benmcollins/libjwt/issues])
+AC_INIT([libjwt],[1.15.2],[https://github.com/benmcollins/libjwt/issues])
 AM_INIT_AUTOMAKE([foreign])
 LT_PREREQ([2.2])
 LT_INIT([])
@@ -107,8 +107,6 @@ PKG_CHECK_MODULES([CHECK], [check >= 0.9.4], [true], [true])
 AX_VALGRIND_CHECK
 
 AX_CODE_COVERAGE
-
-WEAK_ALIAS_SUPPORT
 
 DX_MAN_FEATURE(ON)
 DX_HTML_FEATURE(ON)

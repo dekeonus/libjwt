@@ -65,7 +65,7 @@ START_TEST(test_jwt_dump_fp)
 	ck_assert_int_eq(ret, 0);
 	ck_assert(jwt != NULL);
 
-	ret = jwt_add_grant(jwt, "iss", "files.cyphre.com");
+	ret = jwt_add_grant(jwt, "iss", "files.maclara-llc.com");
 	ck_assert_int_eq(ret, 0);
 
 	ret = jwt_add_grant(jwt, "sub", "user0");
@@ -79,11 +79,10 @@ START_TEST(test_jwt_dump_fp)
 
 #ifdef _WIN32
 	out = fopen("nul", "w");
-	ck_assert(out != NULL);
 #else
 	out = fopen("/dev/null", "w");
-	ck_assert(out != NULL);
 #endif
+	ck_assert_ptr_ne(out, NULL);
 
 	ret = jwt_dump_fp(jwt, out, 1);
 	ck_assert_int_eq(ret, 0);
@@ -111,7 +110,7 @@ START_TEST(test_jwt_dump_str)
 	ck_assert_int_eq(ret, 0);
 	ck_assert(jwt != NULL);
 
-	ret = jwt_add_grant(jwt, "iss", "files.cyphre.com");
+	ret = jwt_add_grant(jwt, "iss", "files.maclara-llc.com");
 	ck_assert_int_eq(ret, 0);
 
 	ret = jwt_add_grant(jwt, "sub", "user0");
@@ -164,7 +163,7 @@ START_TEST(test_jwt_dump_str_alg_default_typ_header)
 	ck_assert_int_eq(ret, 0);
 	ck_assert(jwt != NULL);
 
-	ret = jwt_add_grant(jwt, "iss", "files.cyphre.com");
+	ret = jwt_add_grant(jwt, "iss", "files.maclara-llc.com");
 	ck_assert_int_eq(ret, 0);
 
 	ret = jwt_add_grant(jwt, "sub", "user0");
@@ -226,7 +225,7 @@ START_TEST(test_jwt_dump_str_alg_custom_typ_header)
 	ck_assert_int_eq(ret, 0);
 	ck_assert(jwt != NULL);
 
-	ret = jwt_add_grant(jwt, "iss", "files.cyphre.com");
+	ret = jwt_add_grant(jwt, "iss", "files.maclara-llc.com");
 	ck_assert_int_eq(ret, 0);
 
 	ret = jwt_add_grant(jwt, "sub", "user0");

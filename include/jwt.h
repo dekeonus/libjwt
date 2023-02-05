@@ -1,4 +1,4 @@
-/* Copyright (C) 2015-2018 Ben Collins <ben@cyphre.com>
+/* Copyright (C) 2015-2022 Ben Collins <bcollins@maclara-llc.com>
    This file is part of the JWT C Library
 
    This Source Code Form is subject to the terms of the Mozilla Public
@@ -352,19 +352,6 @@ JWT_EXPORT int jwt_add_grants_json(jwt_t *jwt, const char *json);
  * @return Returns 0 on success, valid errno otherwise.
  */
 JWT_EXPORT int jwt_del_grants(jwt_t *jwt, const char *grant);
-
-/**
- * @deprecated
- * Delete a grant from this JWT object.
- *
- * Deletes the named grant from this object. It is not an error if there
- * is no grant matching the passed name.
- *
- * @param jwt Pointer to a JWT object.
- * @param grant String containing the name of the grant to delete.
- * @return Returns 0 on success, valid errno otherwise.
- */
-DEPRECATED(JWT_EXPORT int jwt_del_grant(jwt_t *jwt, const char *grant));
 
 /** @} */
 
@@ -758,8 +745,8 @@ JWT_EXPORT unsigned int jwt_validate(jwt_t *jwt, jwt_valid_t *jwt_valid);
  *
  * @param jwt_valid Pointer to a JWT validation object pointer. Will be allocated
  *     on success.
+ * @param alg A valid jwt_alg_t specifier.
  * @return 0 on success, valid errno otherwise.
- *
  */
 JWT_EXPORT int jwt_valid_new(jwt_valid_t **jwt_valid, jwt_alg_t alg);
 
@@ -785,6 +772,22 @@ JWT_EXPORT void jwt_valid_free(jwt_valid_t *jwt_valid);
  *   errors, or 0 if validation is currently successful.
  */
 JWT_EXPORT unsigned int jwt_valid_get_status(jwt_valid_t *jwt_valid);
+
+/**
+ * Return the nbf_leeway value set.
+ *
+ * @param jwt_valid Pointer to a JWT validation object.
+ * @return Returns current nbf_leeway value
+ */
+JWT_EXPORT time_t jwt_valid_get_nbf_leeway(jwt_valid_t *jwt_valid);
+
+/**
+ * Return the exp_leeway value set.
+ *
+ * @param jwt_valid Pointer to a JWT validation object.
+ * @return Returns current exp_leeway value
+ */
+JWT_EXPORT time_t jwt_valid_get_exp_leeway(jwt_valid_t *jwt_valid);
 
 /**
  * Add a new string grant requirement to this JWT validation object.
@@ -926,7 +929,7 @@ JWT_EXPORT char* jwt_valid_get_grants_json(jwt_valid_t *jwt_valid, const char *g
  *    is NULL, then all grants are deleted.
  * @return Returns 0 on success, valid errno otherwise.
  */
-JWT_EXPORT int jwt_valid_del_grants(jwt_valid_t *jwt, const char *grant);
+JWT_EXPORT int jwt_valid_del_grants(jwt_valid_t *jwt_valid, const char *grant);
 
 /**
  * Set the time for which expires and not-before claims should be evaluated.
@@ -939,6 +942,26 @@ JWT_EXPORT int jwt_valid_del_grants(jwt_valid_t *jwt, const char *grant);
  *     not-before claims exist in a JWT object.
  */
 JWT_EXPORT int jwt_valid_set_now(jwt_valid_t *jwt_valid, const time_t now);
+
+/**
+ * Set the nbf_leeway value as defined in: https://www.rfc-editor.org/rfc/rfc7519#section-4.1.5.
+ *
+ * @param jwt_valid Pointer to a JWT validation object.
+ * @param nbf_leeway leeway for nbf value.
+ * @return Returns 0 on success, valid errno otherwise.
+ *
+ */
+JWT_EXPORT int jwt_valid_set_nbf_leeway(jwt_valid_t *jwt_valid, const time_t nbf_leeway);
+
+/**
+ * Set the exp_leeway value as defined in: https://www.rfc-editor.org/rfc/rfc7519#section-4.1.4.
+ *
+ * @param jwt_valid Pointer to a JWT validation object.
+ * @param exp_leeway leeway for exp value.
+ * @return Returns 0 on success, valid errno otherwise.
+ *
+ */
+JWT_EXPORT int jwt_valid_set_exp_leeway(jwt_valid_t *jwt_valid, const time_t exp_leeway);
 
 /**
  * Set validation for replicated claims in headers.

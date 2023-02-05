@@ -1,4 +1,4 @@
-/* Copyright (C) 2015-2017 Ben Collins <ben@cyphre.com>
+/* Copyright (C) 2015-2022 Ben Collins <bcollins@maclara-llc.com>
    This file is part of the JWT C Library
 
    This Source Code Form is subject to the terms of the Mozilla Public
@@ -22,6 +22,8 @@ struct jwt {
 struct jwt_valid {
 	jwt_alg_t alg;
 	time_t now;
+	time_t nbf_leeway;
+	time_t exp_leeway;
 	int hdr;
 	json_t *req_grants;
 	unsigned int status;
