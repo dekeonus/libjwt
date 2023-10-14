@@ -10,6 +10,14 @@ TESTS =			\
 	jwt_ec		\
 	jwt_validate
 
+if MULTI_SSL
+if HAVE_OPENSSL
+include ossl_tests.mk
+endif
+if HAVE_GNUTLS
+include gnutls_tests.mk
+endif
+endif
 check_PROGRAMS = $(TESTS)
 
 AM_CPPFLAGS = -I$(top_srcdir)/include

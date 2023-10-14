@@ -6,6 +6,7 @@ LT_INIT([])
 AC_CONFIG_MACRO_DIR([m4])
 AC_CONFIG_HEADERS([libjwt/config.h])
 
+AC_SUBST([LIBJWT_LTVERSION], [11:0:9])
 AC_SUBST([AM_CFLAGS], [-Wall])
 
 dnl Build with OpenSSL when asked
@@ -100,6 +101,9 @@ AS_CASE([$ssl_impl],
 		],
 	[AC_MSG_ERROR([unable to set default ssl library])]
 )
+AM_CONDITIONAL([SSL_DEF_OPENSSL], [test "x$ssl_impl" = "xopenssl"])
+dnl currently unused, for additional ssl implementations
+dnl AM_CONDITIONAL([SSL_DEF_GNUTLS], [test "x$ssl_impl" = "xgnutls"])
 
 PKG_CHECK_MODULES([JANSSON], [jansson >= 2.0])
 PKG_CHECK_MODULES([CHECK], [check >= 0.9.4], [true], [true])
