@@ -1,12 +1,12 @@
 AC_PREREQ([2.61])
-AC_INIT([libjwt],[1.15.3],[https://github.com/benmcollins/libjwt/issues])
+AC_INIT([libjwt],[1.16.0],[https://github.com/benmcollins/libjwt/issues])
 AM_INIT_AUTOMAKE([foreign])
 LT_PREREQ([2.2])
 LT_INIT([])
 AC_CONFIG_MACRO_DIR([m4])
 AC_CONFIG_HEADERS([libjwt/config.h])
 
-AC_SUBST([LIBJWT_LTVERSION], [11:0:9])
+AC_SUBST([LIBJWT_LTVERSION], [11:1:9])
 AC_SUBST([AM_CFLAGS], [-Wall])
 
 dnl Build with OpenSSL when asked
@@ -49,7 +49,7 @@ AS_IF([test "x$with_openssl" = "xyes"], [
 AM_CONDITIONAL([HAVE_OPENSSL], [test "x$found_openssl" = "xyes"])
 
 AS_IF([test "x$with_gnutls" = "xyes"], [
-	PKG_CHECK_MODULES([GNUTLS], [gnutls >= 3.5.8], [found_gnutls=yes])
+	PKG_CHECK_MODULES([GNUTLS], [gnutls >= 3.6.0], [found_gnutls=yes])
 ])
 AM_CONDITIONAL([HAVE_GNUTLS], [test "x$found_gnutls" = "xyes"])
 
